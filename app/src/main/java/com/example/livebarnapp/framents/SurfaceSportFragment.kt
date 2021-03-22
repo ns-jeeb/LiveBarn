@@ -57,7 +57,7 @@ class SurfaceSoccerFragment : Fragment(), MySurfaceItemRecyclerViewAdapter.OnIte
             else -> null
         }
         listLiveData?.observe(viewLifecycleOwner, Observer {
-            binding.list.adapter = MySurfaceItemRecyclerViewAdapter(viewModel,it)
+            binding.list.adapter = MySurfaceItemRecyclerViewAdapter(viewLifecycleOwner,viewModel,it)
             (binding.list.adapter as MySurfaceItemRecyclerViewAdapter).setOnItemClickListener(this)
         })
     }

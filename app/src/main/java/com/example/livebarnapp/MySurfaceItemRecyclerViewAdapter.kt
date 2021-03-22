@@ -8,11 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import com.example.livebarnapp.databinding.FragmentSurfaceItemBinding
 
 import com.example.livebarnapp.models.SurfaceItem
 
-class MySurfaceItemRecyclerViewAdapter(val viewModel: SurfaceViewModel, private var values: ArrayList<SurfaceItem>?
+class MySurfaceItemRecyclerViewAdapter(val lifecycleOwner: LifecycleOwner,val viewModel: SurfaceViewModel, private var values: ArrayList<SurfaceItem>?
 ) : RecyclerView.Adapter<MySurfaceItemRecyclerViewAdapter.ViewHolder>() {
 
     var venueName :String? = null
@@ -38,6 +41,12 @@ class MySurfaceItemRecyclerViewAdapter(val viewModel: SurfaceViewModel, private 
 
         @RequiresApi(Build.VERSION_CODES.KITKAT)
         fun bind(surface: SurfaceItem){
+
+            val listLiveData : LiveData<Bitmap>? =  when(adapterPosition % 2){
+                0 ->  viewModel.getThumbnail1Bitmap()
+                1 ->  viewModel.getThumbnail2Bitmap()
+                else -> null
+            }
             if (venueName == null || venueName != surface.venueName){
                 binding.venueName.visibility = View.VISIBLE
                 binding.venueName.text = surface.venueName
@@ -45,17 +54,12 @@ class MySurfaceItemRecyclerViewAdapter(val viewModel: SurfaceViewModel, private 
             }else{
                 binding.venueName.visibility = View.INVISIBLE
             }
-            var thumbnail: Bitmap? = null
-            if (adapterPosition%2 == 0){
-                thumbnail = viewModel.getThumbnail1Bitmap()
-                binding.videoItem.setBackgroundColor(Color.BLACK)
-            } else{
-                thumbnail = viewModel.getThumbnail2Bitmap()
-                binding.videoItem.setBackgroundColor(Color.LTGRAY)
-            }
-            thumbnail?.let {
-                binding.videoItem.setImageBitmap(thumbnail)
-            }
+
+            listLiveData?.observe(lifecycleOwner, Observer {
+                binding.videoItem.setImageBitmap(it)
+
+            })
+
             binding.serverIp.text = surface.server.ip4
             binding.serverName.text =surface.surfaceName
             itemView.setOnClickListener {

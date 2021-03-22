@@ -27,6 +27,8 @@ class SurfaceViewModel: ViewModel() {
 
     var utilConstin: UtilAndConstant = UtilAndConstant()
     var result = ArrayList<SurfaceItem>()
+    var bitmapResult1: Bitmap? = null
+    var bitmapResult2: Bitmap? = null
 
     val mHokeyItems: LiveData<ArrayList<SurfaceItem>>
     var _hokeyItems = MutableLiveData<ArrayList<SurfaceItem>>()
@@ -43,10 +45,10 @@ class SurfaceViewModel: ViewModel() {
     val mSoccerItems: LiveData<ArrayList<SurfaceItem>>
     var _soccerItems = MutableLiveData<ArrayList<SurfaceItem>>()
 
-    var thumbnail1: Bitmap? = null
-    var thumbnail2: Bitmap? = null
-
+    var _thumbnail1: MutableLiveData<Bitmap>? = MutableLiveData()
+    var _thumbnail2: MutableLiveData<Bitmap>? = MutableLiveData()
     init {
+
         mSoccerItems = _soccerItems
         mVolleballItems = _volleballItems
         mBasketItems = _basketItems
@@ -108,22 +110,25 @@ class SurfaceViewModel: ViewModel() {
         return surfaceItem
     }
 
-    fun getThumbnail1Bitmap(): Bitmap? {
-        if (thumbnail1 == null) {
+    fun getThumbnail1Bitmap(): MutableLiveData<Bitmap>? {
+
+        if (bitmapResult1 == null) {
             viewModelScope.launch {
                 getBitmap(0)
             }
         }
-        return thumbnail1
+        _thumbnail1?.postValue( bitmapResult1)
+        return _thumbnail1
     }
 
-    fun getThumbnail2Bitmap(): Bitmap? {
-        if (thumbnail2 == null) {
+    fun getThumbnail2Bitmap(): MutableLiveData<Bitmap>? {
+        if (bitmapResult1 == null) {
             viewModelScope.launch {
                 getBitmap(1)
             }
         }
-        return thumbnail2
+        _thumbnail2?.postValue(bitmapResult2)
+        return _thumbnail2
     }
 
     suspend fun getBitmap(bitmapNum: Int) {
@@ -142,8 +147,8 @@ class SurfaceViewModel: ViewModel() {
                 var inputStream: InputStream? = urlConnection?.inputStream ?: null // Nothing to do.
                 val bitmap = BitmapFactory.decodeStream(inputStream)
                 when (bitmapNum) {
-                    0 -> thumbnail1 = bitmap
-                    else -> thumbnail2 = bitmap
+                    0 -> bitmapResult1 = bitmap
+                    else -> bitmapResult2 = bitmap
                 }
             }
         }catch (e: IOException){

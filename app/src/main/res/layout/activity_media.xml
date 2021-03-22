@@ -35,9 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginTop="@dimen/text_margin"
-            android:layout_marginStart="@dimen/text_margin"
-            android:layout_marginLeft="@dimen/text_margin"
+            android:layout_marginTop="@dimen/layout_padding_and_margin"
+            android:layout_marginStart="@dimen/layout_padding_and_margin"
+            android:layout_marginLeft="@dimen/layout_padding_and_margin"
 
             android:orientation="horizontal" >
 

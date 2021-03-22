@@ -11,7 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.example.livebarnapp.databinding.ActivityMainBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
-class MainActivity : AppCompatActivity(), OnShareWithSportInterface {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
 
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -48,25 +48,4 @@ class MainActivity : AppCompatActivity(), OnShareWithSportInterface {
         super.onDestroy()
         binding.surfacePerViewPager.unregisterOnPageChangeCallback(surfacePagerAdaptercallback)
     }
-
-    override fun onShowSoccer(soccer: ArrayList<String>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onShowBaseBall(baseball: ArrayList<String>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onShowBasketball(basketball: ArrayList<String>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onShowHokey(hokey: ArrayList<String>) {
-        TODO("Not yet implemented")
-    }
-
-    override fun onShowVolleyball(volleyball: ArrayList<String>) {
-        TODO("Not yet implemented")
-    }
-
 }

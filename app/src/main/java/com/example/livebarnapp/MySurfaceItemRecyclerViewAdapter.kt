@@ -30,17 +30,6 @@ class MySurfaceItemRecyclerViewAdapter(val viewModel: SurfaceViewModel, private 
             holder.bind(item)
         }
     }
-
-//    "id": 9,
-//    "surfaceName": "Rink #1",
-//    "status": "OK",
-//    "venueName": "Arena Repentigny",
-//    "sport": "Hockey",
-//    "server": {
-//    "id": 17594,
-//    "ip4": "0.0.0.17594",
-//    "dns": "test.server_17594.livebarn.com"
-
     override fun getItemCount(): Int = values?.size ?: 0
 
     inner class ViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.fragment_surface_item, parent, false)) {

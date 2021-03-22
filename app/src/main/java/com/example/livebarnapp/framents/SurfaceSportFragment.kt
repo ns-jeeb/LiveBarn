@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.RequiresApi
+import androidx.annotation.VisibleForTesting
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.LiveData
@@ -22,10 +23,9 @@ private const val ARG_PARAM1 = "param1"
 class SurfaceSoccerFragment : Fragment(), MySurfaceItemRecyclerViewAdapter.OnItemClickListener {
 
     private var param1: Int? = null
-
     val shareViewModel: SurfaceViewModel by activityViewModels()
     private var viewModel: SurfaceViewModel = SurfaceViewModel()
-    private lateinit var binding: FragmentSurfaceSportListBinding
+    lateinit var binding: FragmentSurfaceSportListBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +57,7 @@ class SurfaceSoccerFragment : Fragment(), MySurfaceItemRecyclerViewAdapter.OnIte
             else -> null
         }
         listLiveData?.observe(viewLifecycleOwner, Observer {
-            binding.list.adapter = MySurfaceItemRecyclerViewAdapter(viewModel, it)
+            binding.list.adapter = MySurfaceItemRecyclerViewAdapter(viewModel,it)
             (binding.list.adapter as MySurfaceItemRecyclerViewAdapter).setOnItemClickListener(this)
         })
     }

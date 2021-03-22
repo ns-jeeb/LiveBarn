@@ -54,13 +54,13 @@ class SurfaceViewModel: ViewModel() {
         mHokeyItems = _hokeyItems
 
         viewModelScope.launch {
-            httpGet(UtilAndConstant.url)
+            httpGetSurface(UtilAndConstant.url)
             goThroughList(result)
             _mySurface.postValue(result)
         }
     }
 
-    suspend fun httpGet(myURL: String) {
+    private suspend fun httpGetSurface(myURL: String) {
         var urlConnection: HttpURLConnection? = null
         val url = URL(UtilAndConstant.url)
         try {
@@ -103,13 +103,6 @@ class SurfaceViewModel: ViewModel() {
         }
     }
 
-    fun setListToAdapter(it: java.util.ArrayList<SurfaceItem>) {
-        _mySurface.postValue(it!!)
-    }
-
-    fun getListToAdapter() :MutableLiveData<ArrayList<SurfaceItem>>{
-        return _mySurface as MutableLiveData<ArrayList<SurfaceItem>>
-    }
     fun sortingVenueList(surfaceItem: ArrayList<SurfaceItem>): ArrayList<SurfaceItem>{
         surfaceItem.sortWith(compareBy{it.venueName})
         return surfaceItem
@@ -157,11 +150,4 @@ class SurfaceViewModel: ViewModel() {
             Log.e("Error", "Result ${e.stackTraceToString()}");
         }
     }
-}
-interface OnShareWithSportInterface{
-    fun onShowSoccer(soccer: ArrayList<String>)
-    fun onShowBaseBall(baseball: ArrayList<String>)
-    fun onShowBasketball(basketball: ArrayList<String>)
-    fun onShowHokey(hokey: ArrayList<String>)
-    fun onShowVolleyball(volleyball: ArrayList<String>)
 }

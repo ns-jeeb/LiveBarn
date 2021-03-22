@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/text_margin"
+        android:orientation="horizontal">
+
+        <TextView
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/venue_name"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/darker_gray"
+            tools:text="Fore kicks Marlboro"
+            android:layout_marginBottom="30dp"/>
+
+        <ImageView
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/venue_name"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:id="@+id/video_item"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:background="@color/cardview_dark_background"
+            android:src="@drawable/ic_launcher_foreground" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Court #6"
+            android:textSize="18sp"
+            android:id="@+id/server_name"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"
+            app:layout_constraintTop_toBottomOf="@+id/venue_name"
+            app:layout_constraintStart_toEndOf="@+id/video_item"
+            android:layout_margin="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="0.021542"
+            android:textSize="18sp"
+            android:id="@+id/server_ip"
+            android:layout_marginStart="@dimen/text_margin"
+            android:layout_marginLeft="@dimen/text_margin"
+            app:layout_constraintTop_toBottomOf="@+id/server_name"
+            app:layout_constraintStart_toEndOf="@+id/video_item"
+            android:layout_marginBottom="@dimen/text_margin"
+            android:textAppearance="?attr/textAppearanceListItem" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:layout_marginTop="@dimen/text_margin"
+            android:background="@color/cardview_dark_background"
+            app:layout_constraintTop_toBottomOf="@+id/video_item"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
